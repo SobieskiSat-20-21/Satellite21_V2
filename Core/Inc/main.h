@@ -10,10 +10,10 @@
   * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -56,11 +56,11 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
-I2C_HandleTypeDef* I2C2_Handler (void);
-
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LIMIT2_Pin GPIO_PIN_13
+#define LIMIT2_GPIO_Port GPIOC
 #define LEDA_Pin GPIO_PIN_0
 #define LEDA_GPIO_Port GPIOC
 #define LEDB_Pin GPIO_PIN_1
@@ -69,6 +69,52 @@ I2C_HandleTypeDef* I2C2_Handler (void);
 #define LEDC_GPIO_Port GPIOC
 #define LEDD_Pin GPIO_PIN_3
 #define LEDD_GPIO_Port GPIOC
+#define LORA_D1_Pin GPIO_PIN_1
+#define LORA_D1_GPIO_Port GPIOA
+#define LORA_D0_Pin GPIO_PIN_2
+#define LORA_D0_GPIO_Port GPIOA
+#define LORA_RST_Pin GPIO_PIN_3
+#define LORA_RST_GPIO_Port GPIOA
+#define MOT_STBY2_Pin GPIO_PIN_4
+#define MOT_STBY2_GPIO_Port GPIOA
+#define LR_SCK_Pin GPIO_PIN_5
+#define LR_SCK_GPIO_Port GPIOA
+#define LR_MISO_Pin GPIO_PIN_6
+#define LR_MISO_GPIO_Port GPIOA
+#define LR_MOSI_Pin GPIO_PIN_7
+#define LR_MOSI_GPIO_Port GPIOA
+#define LORA_NSS_Pin GPIO_PIN_4
+#define LORA_NSS_GPIO_Port GPIOC
+#define PHA_A2_Pin GPIO_PIN_5
+#define PHA_A2_GPIO_Port GPIOC
+#define ENB_A2_Pin GPIO_PIN_0
+#define ENB_A2_GPIO_Port GPIOB
+#define ENB_A1_Pin GPIO_PIN_1
+#define ENB_A1_GPIO_Port GPIOB
+#define PHA_A1_Pin GPIO_PIN_2
+#define PHA_A1_GPIO_Port GPIOB
+#define SCL_2_Pin GPIO_PIN_10
+#define SCL_2_GPIO_Port GPIOB
+#define SDA_2_Pin GPIO_PIN_11
+#define SDA_2_GPIO_Port GPIOB
+#define MOT_STBY1_Pin GPIO_PIN_12
+#define MOT_STBY1_GPIO_Port GPIOB
+#define USR_2_Pin GPIO_PIN_7
+#define USR_2_GPIO_Port GPIOC
+#define GPS_RX_Pin GPIO_PIN_9
+#define GPS_RX_GPIO_Port GPIOA
+#define GPS_TX_Pin GPIO_PIN_10
+#define GPS_TX_GPIO_Port GPIOA
+#define LIMIT1_Pin GPIO_PIN_13
+#define LIMIT1_GPIO_Port GPIOA
+#define SPI3_NSS_Pin GPIO_PIN_14
+#define SPI3_NSS_GPIO_Port GPIOA
+#define LR_RESET_Pin GPIO_PIN_15
+#define LR_RESET_GPIO_Port GPIOA
+#define BUZZER_Pin GPIO_PIN_8
+#define BUZZER_GPIO_Port GPIOB
+#define USR_1_Pin GPIO_PIN_9
+#define USR_1_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
