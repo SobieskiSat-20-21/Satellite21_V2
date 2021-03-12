@@ -133,7 +133,7 @@ void USBprint(char *pointer){
 
 // prints the string pointed to by pointer in a new line
 void USBprintln(char *pointer){
-    CDC_Transmit_FS("\n", 2);
+    CDC_Transmit_FS("\n\r", 3);
     HAL_Delay(2);
     uint8_t len = strlen(pointer);
     CDC_Transmit_FS(pointer, len);

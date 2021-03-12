@@ -56,10 +56,17 @@ void loop(void){
     USBAddFloatToBuffer(Common.bmpBtm->pressure);
     USBAddStringToBuffer(" Altitude: ");
     USBAddFloatToBuffer(altPressure);
+    USBAddStringToBuffer(" Limit_1, 2: ");
+    USBAddCharToBuffer((char)readPin(LIMIT_1));
+    USBAddCharToBuffer(' ');
+    USBAddCharToBuffer((char)readPin(LIMIT_2));
     USBTPrintBuffer();
 
+    
+    if(readPin(LIMIT_1) && readPin(LIMIT_2)) HAL_TIM_PWM_Start(Get_TIM10_Instance(), TIM_CHANNEL_1);
+    else HAL_TIM_PWM_Stop(Get_TIM10_Instance(), TIM_CHANNEL_1);
 
-    HAL_Delay(1000);
+    HAL_Delay(500);
 
     // duplex_loop();
     // println(Common.radio.txBuffer);

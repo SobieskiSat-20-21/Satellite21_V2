@@ -56,11 +56,14 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
+I2C_HandleTypeDef* I2C2_Handler (void);
+TIM_HandleTypeDef* Get_TIM10_Instance(void);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LIMIT2_Pin GPIO_PIN_13
-#define LIMIT2_GPIO_Port GPIOC
+#define LIMIT_2_Pin GPIO_PIN_13
+#define LIMIT_2_GPIO_Port GPIOC
 #define LEDA_Pin GPIO_PIN_0
 #define LEDA_GPIO_Port GPIOC
 #define LEDB_Pin GPIO_PIN_1
@@ -105,14 +108,10 @@ void Error_Handler(void);
 #define GPS_RX_GPIO_Port GPIOA
 #define GPS_TX_Pin GPIO_PIN_10
 #define GPS_TX_GPIO_Port GPIOA
-#define LIMIT1_Pin GPIO_PIN_13
-#define LIMIT1_GPIO_Port GPIOA
-#define SPI3_NSS_Pin GPIO_PIN_14
-#define SPI3_NSS_GPIO_Port GPIOA
-#define LR_RESET_Pin GPIO_PIN_15
-#define LR_RESET_GPIO_Port GPIOA
-#define BUZZER_Pin GPIO_PIN_8
-#define BUZZER_GPIO_Port GPIOB
+#define LIMIT_1_Pin GPIO_PIN_13
+#define LIMIT_1_GPIO_Port GPIOA
+#define SD_SW_Pin GPIO_PIN_15
+#define SD_SW_GPIO_Port GPIOA
 #define USR_1_Pin GPIO_PIN_9
 #define USR_1_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
