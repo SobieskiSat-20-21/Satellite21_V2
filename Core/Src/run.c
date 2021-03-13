@@ -6,7 +6,7 @@
 #include "USB_com.h"
 #include "config.h"
 #include "bmp280.h"
-#include "sensing_setup.h"
+#include "setup_scripts.h"
 
 #include "main.h"
 
@@ -24,9 +24,8 @@ void setup(void){
     writePin(LEDC, LOW);
     writePin(LEDD, LOW);
     
-    sensingSetup();
-    Common.buzzer = &defaultBuzzer;
-    buzzerDefaultInit(Common.buzzer);
+    bmpSetup();
+    buzzerSetup();
     HAL_Delay(10);
 
     // if(!duplex_setup() && RUN_DEBUG) println("SX1278 NOT IN USE!");
@@ -75,11 +74,11 @@ void loop(void){
     }
 
     if(readPin(LIMIT_1)){
-        buzzerSetFrequency(Common.buzzer ,Common.buzzer->frequency + 500);
+        buzzerSetFrequency(Common.buzzer ,Common.buzzer->frequency + 100);
     }
 
     if(readPin(LIMIT_2)){
-        buzzerSetFrequency(Common.buzzer, Common.buzzer->frequency - 500);
+        buzzerSetFrequency(Common.buzzer, Common.buzzer->frequency - 100);
     }
 
     writePin(LEDA, Common.buzzer->state);

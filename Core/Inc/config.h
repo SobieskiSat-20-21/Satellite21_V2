@@ -19,6 +19,7 @@
 // Peripherial state
 #define BMP_TOP_ENABLE 1
 #define BMP_BTM_ENABLE 1
+#define BUZZER_ENABLE 0
 #define SD_ENABLE 1
 #define RADIO_ENABLE 1
 #define GPS_ENABLE 1

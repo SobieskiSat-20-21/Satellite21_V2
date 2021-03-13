@@ -73,13 +73,13 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c \
 Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c \
 Core/Src/bmp280.c \
 Core/Src/run.c \
-Core/Src/sensing_setup.c \
 Core/Src/USB_com.c \
 Core/Src/spi.c \
 Core/Src/usart.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
-Core/Src/buzzer.c
+Core/Src/buzzer.c \
+Core/Src/setup_scripts.c
 
 
 # ASM sources

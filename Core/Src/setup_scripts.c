@@ -7,12 +7,12 @@
 // #include "run.h"
 
 // #endif
-#include "sensing_setup.h"
+#include "setup_scripts.h"
 
  // Contains the scripts for running sensor setup
  // BMPs, IMU, GPS
  
-bool sensingSetup(void){
+bool bmpSetup(void){
     bool report = true;
     bool singularInit = false;
 
@@ -61,3 +61,10 @@ bool sensingSetup(void){
     return report;
 }
 
+bool buzzerSetup(){
+    #if BUZZER_ENABLE
+    Common.buzzer = &defaultBuzzer;
+    buzzerDefaultInit(Common.buzzer);
+    #endif
+    return BUZZER_ENABLE;
+}

@@ -5,9 +5,12 @@
 
 typedef struct{
     TIM_HandleTypeDef* buzzerTimer;     // pointer to a timer struct
-    uint8_t BuzzerTimerChannel;         // channel used for PWM
+    uint16_t buzzerTimerChannel;        // channel used for PWM
+    uint32_t clockFrequency;            // frequency of the timer clock
     uint16_t frequency;                 // in Hz
-    uint8_t state;                      // On = 1, Off = 0
+    uint16_t state;                     // On = 1, Off = 0
+    uint16_t maxFrequency;
+    uint16_t minFrequency;
 } Buzzer;
 
 Buzzer defaultBuzzer;
