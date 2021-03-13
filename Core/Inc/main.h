@@ -112,6 +112,8 @@ TIM_HandleTypeDef* Get_TIM10_Instance(void);
 #define LIMIT_1_GPIO_Port GPIOA
 #define SD_SW_Pin GPIO_PIN_15
 #define SD_SW_GPIO_Port GPIOA
+#define BUZZER_Pin GPIO_PIN_8
+#define BUZZER_GPIO_Port GPIOB
 #define USR_1_Pin GPIO_PIN_9
 #define USR_1_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */

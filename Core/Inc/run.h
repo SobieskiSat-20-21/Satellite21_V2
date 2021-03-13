@@ -9,6 +9,7 @@
 
 #include "bmp280.h"
 #include "config.h"
+#include "buzzer.h"
 
 
 // this struct will hold all data about sensors
@@ -22,6 +23,8 @@ struct {
     BMP280 *bmpTop;
     BMP280 *bmpBtm;
     BMP280_config *bmpConfig;
+
+    Buzzer *buzzer;
 
     // SX1278 radio;
 } Common;
