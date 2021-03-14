@@ -8,6 +8,8 @@
 
 // #endif
 #include "setup_scripts.h"
+#include "clock.h"
+#include "main.h"
 
  // Contains the scripts for running sensor setup
  // BMPs, IMU, GPS
@@ -26,7 +28,7 @@ bool bmpSetup(void){
         Common.bmpConfig = &bmp280_default_config;
         Common.bmpTop = &bmpTop;
         singularInit = bmp280_init(Common.bmpTop, Common.bmpConfig);
-        #if RUN_DEBUG
+        #if SENSING_DEBUG
             if(singularInit) {
                 USBprintln("Top layer BMP is working");
             }
@@ -47,7 +49,7 @@ bool bmpSetup(void){
         Common.bmpConfig = &bmp280_default_config;
         Common.bmpBtm = &bmpBtm;
         singularInit = bmp280_init(Common.bmpBtm, Common.bmpConfig);
-        #if RUN_DEBUG
+        #if SENSING_DEBUG
             if(singularInit) {
                 USBprintln("Bottom layer BMP is working");
             }
@@ -61,10 +63,125 @@ bool bmpSetup(void){
     return report;
 }
 
-bool buzzerSetup(){
+bool mpuSetup(void){
+    #if MPU_ENABLE
+
+    uint8_t attempts = 0;
+
+    mpu.i2c_addr = MPU9250_I2C_ADDRESS;
+    mpu.i2c_addr_ak = AK8963_I2C_ADDRESS;
+    mpu.i2c = I2C2_Handler();
+
+
+    #if SENSING_DEBUG
+	    USBprintln("[SENSING] Initializing MPU9250");
+	#endif
+
+    while (!MPU9250_present(&mpu))
+		{
+			if (++attempts > 5)
+			{
+				#if SENSING_DEBUG
+					USBprintln("error: [SENSING] No connection with MPU9250, no IMU data will be avaliable");
+				#endif
+				mpu.active = false;
+				break;
+			}
+			delay(500);
+        }
+        
+    if (mpu.active)
+		{
+			#if SENSING_DEBUG
+				USBprintln("[SENSING] Initializing AK8963");
+			#endif
+
+			while (!AK8963_present(&(mpu)) && false) //####################
+			{
+				if (++attempts > 5)
+				{
+					#if SENSING_DEBUG
+						USBprintln("error: [SENSING] No connection with AK8963, no IMU data will be avaliable");
+					#endif
+
+					mpu.active = false;
+					break;
+				}
+
+				delay(500);
+				#if SENSING_DEBUG
+					USBprintln("[SENSING] AK8963 init unsuccesfull, retrying...");
+				#endif
+			}
+		}
+
+        if (mpu.active)
+		{	
+			#if SENSING_DEBUG
+					USBprintln("[SENSING] Checking MPU9250 readings. Don't move the board!");
+			#endif
+
+			attempts = 0;
+			writePin(LEDA, HIGH);
+			delay(500);
+			while (!MPU9250_SelfTest(&(mpu)))
+			{
+				if (++attempts > 5)
+				{
+					#if SENSING_DEBUG
+						USBprintln("warning: [SENSING] MPU9250 SelfTest not passed, performance issues may occur");
+					#endif
+					break;
+				}
+				
+				delay(500);
+				#if SENSING_DEBUG
+					USBprintln("[SENSING] MPU9250 SelfTest failed, retrying...");
+				#endif
+			}
+			if (mpu9250_default_config.calibrate)
+			{
+				#if SENSING_DEBUG
+					USBprintln("[SENSING] Performing MPU9250 calibration. Don't move the board!");
+				#endif
+			}
+			else
+			{
+				#if SENSING_DEBUG
+					USBprintln("warning: [SENSING] Skipping IMU calibration!");
+				#endif
+			}
+
+			MPU9250_init(&(mpu), &mpu9250_default_config);
+			writePin(LEDA, LOW);
+			writePin(LEDB, HIGH);
+			if (mpu9250_default_config.calibrate)
+			{
+				#if SENSING_DEBUG
+					USBprintln("[SENSING] Performing AK8963 calibration. Rotate the board.");
+				#endif
+			}
+			AK8963_init(&(mpu), &mpu9250_default_config);
+			writePin(LEDB, LOW);
+		}
+	#else
+		#if SENSING_DEBUG
+			USBprintln("warning: [SENSING] MPU9250 DISABLED!");
+		#endif
+		mpu.active = false;    
+
+    #endif
+
+    Common.mpu = &mpu;
+
+}
+
+bool buzzerSetup(void){
     #if BUZZER_ENABLE
+
     Common.buzzer = &defaultBuzzer;
     buzzerDefaultInit(Common.buzzer);
+
     #endif
     return BUZZER_ENABLE;
 }

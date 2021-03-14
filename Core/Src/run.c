@@ -9,6 +9,7 @@
 #include "setup_scripts.h"
 
 #include "main.h"
+#include "clock.h"
 
 //***** function declarations *****//
 // static bool BMP280Setup(void);
@@ -26,6 +27,7 @@ void setup(void){
     
     bmpSetup();
     buzzerSetup();
+    mpuSetup();
     HAL_Delay(10);
 
     // if(!duplex_setup() && RUN_DEBUG) println("SX1278 NOT IN USE!");
@@ -42,31 +44,36 @@ void loop(void){
         if(RUN_DEBUG) USBprintln("Bottpm layer BMP does not update!");
     }
 
-    // altPressure = altFromPressure(Common.bmpTop->pressure);
-    // USBAddStringToBuffer("Top - Temperature: ");
-    // USBAddFloatToBuffer(Common.bmpTop->temperature);
-    // USBAddStringToBuffer(" Pressure: ");
-    // USBAddFloatToBuffer(Common.bmpTop->pressure);
-    // USBAddStringToBuffer(" Altitude: ");
-    // USBAddFloatToBuffer(altPressure);
-    // USBTPrintBuffer();
+    #if RUN_DEBUG
+        altPressure = altFromPressure(Common.bmpTop->pressure);
+        USBAddStringToBuffer("Top - Temperature: ");
+        USBAddFloatToBuffer(Common.bmpTop->temperature);
+        USBAddStringToBuffer(" Pressure: ");
+        USBAddFloatToBuffer(Common.bmpTop->pressure);
+        USBAddStringToBuffer(" Altitude: ");
+        USBAddFloatToBuffer(altPressure);
+        USBTPrintBuffer();
 
-    // altPressure = altFromPressure(Common.bmpBtm->pressure);
-    // USBAddStringToBuffer("Bottom - Temperature: ");
-    // USBAddFloatToBuffer(Common.bmpBtm->temperature);
-    // // USBAddStringToBuffer(" Pressure: ");
-    // // USBAddFloatToBuffer(Common.bmpBtm->pressure);
-    // // USBAddStringToBuffer(" Altitude: ");
-    // // USBAddFloatToBuffer(altPressure);
-    USBAddStringToBuffer(" Limit_1, 2: ");
-    USBAddCharToBuffer((char)readPin(LIMIT_1) + '0');
-    USBAddCharToBuffer(' ');
-    USBAddCharToBuffer((char)readPin(LIMIT_2) + '0');
-    USBTPrintBuffer();
+        altPressure = altFromPressure(Common.bmpBtm->pressure);
+        USBAddStringToBuffer("Bottom - Temperature: ");
+        USBAddFloatToBuffer(Common.bmpBtm->temperature);
+        USBAddStringToBuffer(" Pressure: ");
+        USBAddFloatToBuffer(Common.bmpBtm->pressure);
+        USBAddStringToBuffer(" Altitude: ");
+        USBAddFloatToBuffer(altPressure);
+        USBTPrintBuffer();
 
-    USBAddStringToBuffer("Current Frequency: ");
-    USBAddLongToBuffer(Common.buzzer->frequency);
-    USBTPrintBuffer();
+        USBAddStringToBuffer(" Limit_1, 2: ");
+        USBAddCharToBuffer((char)readPin(LIMIT_1) + '0');
+        USBAddCharToBuffer(' ');
+        USBAddCharToBuffer((char)readPin(LIMIT_2) + '0');
+        USBTPrintBuffer();
+
+        USBAddStringToBuffer("Current Frequency: ");
+        USBAddLongToBuffer(Common.buzzer->frequency);
+        USBTPrintBuffer();
+
+        #endif
 
     
     if(readPin(LIMIT_1) && readPin(LIMIT_2)) {
@@ -87,6 +94,16 @@ void loop(void){
     writePin(LEDC, readPin(LIMIT_2));
 
     HAL_Delay(200);
+    uint32_t prev = millis();;
+    while(1){
+        if(millis() - prev >= 1000){    
+            prev = millis();
+            USBAddLongToBuffer(TIM2->CNT);
+            USBTPrintBuffer();
+            togglePin(LEDA);
+            togglePin(LEDC);
+        }
+    }
 
     // duplex_loop();
     // println(Common.radio.txBuffer);

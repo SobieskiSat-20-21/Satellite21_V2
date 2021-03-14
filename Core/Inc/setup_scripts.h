@@ -7,6 +7,7 @@
 #include "run.h"
 
 bool bmpSetup(void);
+bool mpuSetup(void);
 bool buzzerSetup(void);
 
 #endif

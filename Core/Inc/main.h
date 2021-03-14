@@ -56,7 +56,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
-I2C_HandleTypeDef* I2C2_Handler (void);
+I2C_HandleTypeDef* I2C2_Handler(void);
 TIM_HandleTypeDef* Get_TIM10_Instance(void);
 
 /* USER CODE END EFP */

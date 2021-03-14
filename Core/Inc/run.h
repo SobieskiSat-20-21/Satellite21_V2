@@ -10,6 +10,7 @@
 #include "bmp280.h"
 #include "config.h"
 #include "buzzer.h"
+#include "mpu9250.h"
 
 
 // this struct will hold all data about sensors
@@ -24,6 +25,8 @@ struct {
     BMP280 *bmpBtm;
     BMP280_config *bmpConfig;
 
+    MPU9250 *mpu;
+
     Buzzer *buzzer;
 
     // SX1278 radio;
@@ -33,6 +36,8 @@ struct {
 BMP280 bmpTop;
 // BMP280 structs for bottom layer 
 BMP280 bmpBtm;
+// MPU9250 struct 
+MPU9250 mpu;
 
 float altPressure;
 

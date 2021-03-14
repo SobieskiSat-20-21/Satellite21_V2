@@ -4,6 +4,8 @@
 #include "config.h"
 
 void buzzerDefaultInit(Buzzer* buzzer){
+    #if BUZZER_ENABLE
+
     buzzer->buzzerTimer = Get_TIM10_Instance();
     buzzer->buzzerTimerChannel = TIM_CHANNEL_1;
     buzzer->clockFrequency = 72000000;
@@ -11,8 +13,13 @@ void buzzerDefaultInit(Buzzer* buzzer){
     buzzer->state = 0;
     buzzer->maxFrequency = 5500;
     buzzer->minFrequency = 1100;
+
+    #endif
 }
 
+// returns true if the requested frequency has been set
+// returns false if the value is out of range
+// in that case min or max frequency is set accordingly
 bool buzzerSetFrequency(Buzzer* buzzer, uint16_t frequency){
     #if BUZZER_ENABLE
 

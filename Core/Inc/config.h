@@ -1,6 +1,26 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
+// IMU config
+#include "mpu9250.h"
+// ? ADD SMPLRT_DIV
+static MPU9250_config mpu9250_default_config =
+{
+	{90.0f, 90.0f, 90.0f},	// Euler offsets
+	MPU9250_AFS_2G,		// Ascale
+	MPU9250_GFS_250DPS, // Gscale
+	MPU9250_MFS_16BITS, // Mscale
+	MPU9250_MMODE_100,	// Mmode
+	
+	true,				// force calibration on startup
+	{12.381678, 12.381678, -923.776245},	// magbias[3]
+	{0.862595, 2.022901, -1.541985},	// gyroBias[3]
+	{-83.557129 / 1000.0, 5.432129 / 1000.0, 139.282227 / 1000.0},	// accelBias[3]
+
+	-1,					// alg_rate [Hz]
+	100.0				// euler_rate [Hz]
+};
+
 #include "stm32f4xx_hal.h"
 // Pressure sensor config
 #define SEA_PRESSURE 1013	// pressure at sea level [hPa]
@@ -19,11 +39,11 @@
 // Peripherial state
 #define BMP_TOP_ENABLE 1
 #define BMP_BTM_ENABLE 1
-#define BUZZER_ENABLE 0
+#define BUZZER_ENABLE 1
 #define SD_ENABLE 1
 #define RADIO_ENABLE 1
 #define GPS_ENABLE 1
-#define IMU_ENABLE 1
+#define MPU_ENABLE 1
 
 // Debug messages
 #define RUN_DEBUG 1

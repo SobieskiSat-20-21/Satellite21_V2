@@ -101,8 +101,7 @@ int main(void)
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_GPIO_WritePin(LEDD_GPIO_Port, LEDD_Pin, GPIO_PIN_SET);
-
+  HAL_TIM_Base_Start(&htim2);
   setup();
 
   /* USER CODE END 2 */
