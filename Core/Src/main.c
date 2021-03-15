@@ -165,7 +165,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 I2C_HandleTypeDef* I2C2_Handler (void) { return &hi2c2; }
-TIM_HandleTypeDef* Get_TIM10_Instance(void) { return &htim10; };
+TIM_HandleTypeDef* Get_TIM10_Instance(void) { return &htim10; }
 
 /* USER CODE END 4 */
 

@@ -1,5 +1,4 @@
 #include "run.h"
-// #include "sensing_setup.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -30,9 +29,6 @@ void setup(void){
     mpuSetup();
     HAL_Delay(10);
 
-    // if(!duplex_setup() && RUN_DEBUG) println("SX1278 NOT IN USE!");
-    //else println("SX1278 IS OK");
-    //prevMillis = millis();
 }
 
 void loop(void){ 
@@ -93,67 +89,6 @@ void loop(void){
     writePin(LEDB, readPin(LIMIT_1));
     writePin(LEDC, readPin(LIMIT_2));
 
-    HAL_Delay(200);
-    uint32_t prev = millis();;
-    while(1){
-        if(millis() - prev >= 1000){    
-            prev = millis();
-            USBAddLongToBuffer(TIM2->CNT);
-            USBTPrintBuffer();
-            togglePin(LEDA);
-            togglePin(LEDC);
-        }
-    }
-
-    // duplex_loop();
-    // println(Common.radio.txBuffer);
-
-    // if(altPressure<100 && get_ang()==90 && oneTime==false){
-    //     setAngle(-360);
-    //     //openMotor(true, 360);
-    //     oneTime=true;
-    // }
-
-    /*if(altPressure<100 && get_ang()==90)
-    {
-        if(motorOpen == false){
-            prevMillis = millis();
-            motorOpen = true;
-        }
-        enableMotor();
-        writePin(LEDB, HIGH);
-        //delay(4500);
-        if(motorOpen ==true && millis()-prevMillis > 5){
-            disableMotor();
-            servoOpen = false;
-        }
-    }*/
-
-    /*if(readPin(BTN_1))
-    {
-        setMotor();
-        writePin(LEDD, HIGH);
-    }
-    else
-    {
-        writePin(LEDD, LOW);
-        disableMotor();
-        writePin(LEDC, HIGH);
-    }/*
-
-    /*char message[32];
-    itoa(altPressure, message, 10);
-    println(message);
-    delay(16);
-    if(millis() - prevMillis >= 500){
-        prevMillis = millis();
-        togglePin(LEDA);
-    }*/
-
-    //USBprintln(4, "T: ", temperature, " P: ", pressure);
-    //USBprintln(2, "Alt: ", altPressure);
-
-    //HAL_Delay(50);
 }
 
 float altFromPressure(float pressure){
