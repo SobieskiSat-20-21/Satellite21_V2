@@ -57,6 +57,7 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 
 I2C_HandleTypeDef* I2C2_Handler(void);
+SPI_HandleTypeDef* Get_SPI1_Instance(void);
 TIM_HandleTypeDef* Get_TIM10_Instance(void);
 RTC_HandleTypeDef* Get_RTC_Instance(void);
 UART_HandleTypeDef* Get_UART1_Instance(void);
@@ -72,12 +73,12 @@ UART_HandleTypeDef* Get_UART1_Instance(void);
 #define LEDC_GPIO_Port GPIOC
 #define LEDD_Pin GPIO_PIN_3
 #define LEDD_GPIO_Port GPIOC
-#define LORA_D1_Pin GPIO_PIN_1
-#define LORA_D1_GPIO_Port GPIOA
-#define LORA_D0_Pin GPIO_PIN_2
-#define LORA_D0_GPIO_Port GPIOA
-#define LORA_RST_Pin GPIO_PIN_3
-#define LORA_RST_GPIO_Port GPIOA
+#define LR_D1_Pin GPIO_PIN_1
+#define LR_D1_GPIO_Port GPIOA
+#define LR_D0_Pin GPIO_PIN_2
+#define LR_D0_GPIO_Port GPIOA
+#define LR_RST_Pin GPIO_PIN_3
+#define LR_RST_GPIO_Port GPIOA
 #define MOT_STBY2_Pin GPIO_PIN_4
 #define MOT_STBY2_GPIO_Port GPIOA
 #define LR_SCK_Pin GPIO_PIN_5
@@ -86,8 +87,8 @@ UART_HandleTypeDef* Get_UART1_Instance(void);
 #define LR_MISO_GPIO_Port GPIOA
 #define LR_MOSI_Pin GPIO_PIN_7
 #define LR_MOSI_GPIO_Port GPIOA
-#define LORA_NSS_Pin GPIO_PIN_4
-#define LORA_NSS_GPIO_Port GPIOC
+#define LR_NSS_Pin GPIO_PIN_4
+#define LR_NSS_GPIO_Port GPIOC
 #define PHA_A2_Pin GPIO_PIN_5
 #define PHA_A2_GPIO_Port GPIOC
 #define ENB_A2_Pin GPIO_PIN_0

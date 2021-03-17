@@ -33,7 +33,7 @@ static bool duplex_setup(void)
 	//(*Common.log_print)("*D00"); // [DUPLEX] Hello!
 	#if RADIO_ENABLE
 		Common.radio.reset = LR_RST_Pin;		Common.radio.reset_port = LR_RST_GPIO_Port;
-		Common.radio.dio0 = LR_D0_Pin;		Common.radio.dio0_port = LR_D0_GPIO_Port;
+		Common.radio.dio0 = LR_D0_Pin;			Common.radio.dio0_port = LR_D0_GPIO_Port;
 		Common.radio.nss = LR_NSS_Pin;			Common.radio.nss_port = LR_NSS_GPIO_Port;
 		Common.radio.spi = Get_SPI1_Instance();
 		Common.radio.config = sx1278_default_config;
