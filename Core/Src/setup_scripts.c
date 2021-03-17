@@ -10,6 +10,8 @@
 #include "setup_scripts.h"
 #include "clock.h"
 #include "main.h"
+#include "gps.h"
+#include "config.h"
 
  // Contains the scripts for running sensor setup
  // BMPs, IMU, GPS
@@ -184,4 +186,47 @@ bool buzzerSetup(void){
 
     #endif
     return BUZZER_ENABLE;
+}
+
+bool gpsSetup(void){
+	#if GPS_ENABLE
+		uint8_t attempts = 0;
+		gps.uart = Get_UART1_Instance();
+		#if SENSING_DEBUG
+			USBprintln("[SENSING] Initializing L86");
+		#endif
+
+		while (!GPS_init(&gps))
+		{
+			if (++attempts > 5)
+			{
+				#if SENSING_DEBUG
+					USBprintln("error: [SENSING] No connection with L86, no GPS data will be avaliable");
+					return false;
+				#endif
+				break;
+			}
+
+			delay(500);
+			#if SENSING_DEBUG
+				USBprintln("[SENSING] L86 init unsuccesfull, retrying...");
+			#endif
+		}
+		gps.active = true; //######################
+		gps.paused = false;
+		if (gps.active && !gps.fix)
+		{
+			gps.latitudeDegrees = DEFAULT_LAT;
+			gps.longitudeDegrees = DEFAULT_LONG;
+			gps.altitude = DEFAULT_ALT;
+		}
+	#else
+		#if SENSING_DEBUG
+			USBprintln("warning: [SENSING] L86 DISABLED!");
+		#endif
+		gps.active = false;
+	#endif
+
+	Common.gps = &gps;
+	return true;
 }

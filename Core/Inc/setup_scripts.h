@@ -8,6 +8,7 @@
 
 bool bmpSetup(void);
 bool mpuSetup(void);
+bool gpsSetup(void);
 bool buzzerSetup(void);
 
 #endif

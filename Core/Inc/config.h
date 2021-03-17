@@ -56,4 +56,10 @@ static MPU9250_config mpu9250_default_config =
 #define SENSING_DEBUG 1
 #define STEERING_DEBUG 0
 
+// GPS default values
+#define DEFAULT_LAT 50
+#define DEFAULT_LONG 19
+#define DEFAULT_ALT 250
+
+
 #endif /* CONFIG_H_ */

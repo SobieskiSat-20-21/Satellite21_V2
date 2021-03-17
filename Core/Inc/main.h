@@ -58,12 +58,12 @@ void Error_Handler(void);
 
 I2C_HandleTypeDef* I2C2_Handler(void);
 TIM_HandleTypeDef* Get_TIM10_Instance(void);
+RTC_HandleTypeDef* Get_RTC_Instance(void);
+UART_HandleTypeDef* Get_UART1_Instance(void);
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LIMIT_2_Pin GPIO_PIN_13
-#define LIMIT_2_GPIO_Port GPIOC
 #define LEDA_Pin GPIO_PIN_0
 #define LEDA_GPIO_Port GPIOC
 #define LEDB_Pin GPIO_PIN_1

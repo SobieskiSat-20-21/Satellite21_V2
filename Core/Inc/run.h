@@ -11,6 +11,7 @@
 #include "config.h"
 #include "buzzer.h"
 #include "mpu9250.h"
+#include "gps.h"
 
 
 // this struct will hold all data about sensors
@@ -26,6 +27,8 @@ struct {
     BMP280_config *bmpConfig;
 
     MPU9250 *mpu;
+
+    GPS* gps;
 
     Buzzer *buzzer;
 
