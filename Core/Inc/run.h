@@ -12,6 +12,7 @@
 #include "buzzer.h"
 #include "mpu9250.h"
 #include "gps.h"
+#include "sx1278.h"
 
 
 // this struct will hold all data about sensors
@@ -32,7 +33,7 @@ struct {
 
     Buzzer *buzzer;
 
-    // SX1278 radio;
+    SX1278 radio;
 } Common;
 
 // BMP280 structs for top layer

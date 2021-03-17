@@ -5,6 +5,8 @@
 #include "USB_com.h"
 #include "config.h"
 #include "bmp280.h"
+#include "radio.c"
+#include "servo.h"
 #include "setup_scripts.h"
 
 #include "main.h"
@@ -29,6 +31,7 @@ void setup(void){
     mpuSetup();
     gpsSetup();
     HAL_Delay(10);
+    duplex_setup();
 
 }
 
@@ -91,6 +94,8 @@ void loop(void){
     // writePin(LEDD, Common.buzzer->state);
     // writePin(LEDB, readPin(LIMIT_1));
     // writePin(LEDC, readPin(LIMIT_2));
+
+    duplex_loop();
 
 }
 
