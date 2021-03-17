@@ -101,6 +101,7 @@ int main(void)
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
   HAL_TIM_Base_Start(&htim2);
   setup();
 
@@ -165,6 +166,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 I2C_HandleTypeDef* I2C2_Handler (void) { return &hi2c2; }
+SPI_HandleTypeDef* Get_SPI1_Instance(void) { return &hspi1; }
 TIM_HandleTypeDef* Get_TIM10_Instance(void) { return &htim10; }
 
 /* USER CODE END 4 */
