@@ -95,15 +95,15 @@ static void decodePacket()
 		//Servo
 		if(recv == 1){
 			if(valu==0){
-				set_ang(90);
+				set_ang(Common.servoDron,90);
 				writePin(LEDD,LOW);
 			}
 			else if(valu==1){
-				set_ang(0);
+				set_ang(Common.servoDron,0);
 				writePin(LEDD,HIGH);
 			}
 			else{
-				set_ang(valu);
+				set_ang(Common.servoDron,valu);
 			}
 		}
 		//Parachute

@@ -28,8 +28,8 @@ void setup(void){
     
     bmpSetup();
     buzzerSetup();
-    mpuSetup();
-    gpsSetup();
+    // mpuSetup();
+    // gpsSetup();
     HAL_Delay(10);
     duplex_setup();
 

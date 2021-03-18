@@ -13,6 +13,7 @@
 #include "mpu9250.h"
 #include "gps.h"
 #include "sx1278.h"
+#include "servo.h"
 
 
 // this struct will hold all data about sensors
@@ -32,6 +33,9 @@ struct {
     GPS* gps;
 
     Buzzer *buzzer;
+
+    Servo *servoDron;
+    Servo *servoMain;
 
     SX1278 radio;
 } Common;
